@@ -18,7 +18,7 @@ import javax.persistence.Table;
             query = "SELECT m FROM Message AS m ORDER BY m.id DESC"
             )
 })
-@Table(name = "messags")
+@Table(name = "messages")
 public class Message {
     @Id
     @Column(name = "id")
@@ -61,12 +61,12 @@ public class Message {
         this.content = content;
     }
 
-    public Timestamp getCteated_at() {
+    public Timestamp getCreated_at() {
         return created_at;
     }
 
-    public void setCteated_at(Timestamp cteated_at) {
-        this.created_at = cteated_at;
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
     }
 
     public Timestamp getUpdated_at() {
