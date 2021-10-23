@@ -18,8 +18,8 @@ import utils.DBUtil;
  */
 @WebServlet("/create")
 public class CreateServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -27,18 +27,18 @@ public class CreateServlet extends HttpServlet {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    String _token = request.getParameter("_token");
-	    if(_token != null &&  _token.equals(request.getSession().getId())) {
-	        EntityManager em = DBUtil.createEntityManager();
-	        em.getTransaction().begin();
-	        
-	        Message m = new Message();
-	        
-	        String title = request.getParameter("title");
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String _token = request.getParameter("_token");
+        if(_token != null &&  _token.equals(request.getSession().getId())) {
+            EntityManager em = DBUtil.createEntityManager();
+
+
+            Message m = new Message();
+
+            String title = request.getParameter("title");
             m.setTitle(title);
 
             String content = request.getParameter("content");
@@ -48,12 +48,13 @@ public class CreateServlet extends HttpServlet {
             m.setCreated_at(currentTime);
             m.setUpdated_at(currentTime);
 
+            em.getTransaction().begin();
             em.persist(m);
             em.getTransaction().commit();
             em.close();
 
             response.sendRedirect(request.getContextPath() + "/index");
-	    }
-	}
+        }
+    }
 
 }
